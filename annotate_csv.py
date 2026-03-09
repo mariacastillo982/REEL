@@ -123,7 +123,7 @@ def main():
         os.unlink(tmp_json.name)
 
     # 5. Read results JSON produced by run.py
-    results_file = f"{run_label}_results.json"
+    results_file = f"{run_label}_out.json"
     """if not os.path.exists(results_file):
         print(f"Error: results file '{results_file}' not found after running REEL.", file=sys.stderr)
         sys.exit(1)"""
