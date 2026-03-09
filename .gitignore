@@ -1,0 +1,28 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+
+# Environment files
+.env
+venv/
+env/
+/lib/
+/lib64/
+/bin/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+
+# Editor/OS specific files (customize as needed)
+.vscode/
+.idea/
+.DS_Store
+thumbs.db
+
+
+# Log files
+*.log
