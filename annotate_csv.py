@@ -118,7 +118,6 @@ def main():
     try:
         json.dump(input_data, tmp_json)
         tmp_json.close()
-        print(tmp_json.name)  # Debug: print path to temp JSON file
         # 4. Run REEL pipeline
         run_reel(f"{run_label}_results.json", run_label, args.model, args.link_mode)
     finally:
@@ -132,7 +131,7 @@ def main():
 
     with open(results_file, encoding="utf-8") as f:
         results = json.load(f)
-
+    print(results)
     # 6. Merge ChEBI IDs back into CSV rows
     rows = merge_results(rows, entity_col, results)
 
