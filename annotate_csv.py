@@ -106,30 +106,29 @@ def main():
 
     # 2. Build JSON input for REEL
     input_data = build_json_input(rows, entity_col)
-    print('1')
-    print(input_data)
+    
     # 3. Write temp JSON file
     run_label = os.path.splitext(os.path.basename(args.input_csv))[0]
-    print('2')
-    print(run_label)
+
+    with open(f"{run_label}_results.json", "w", encoding="utf-8") as f:
+        json.dump(input_data, f)
     tmp_json = tempfile.NamedTemporaryFile(
         mode="w", suffix=".json", delete=False, encoding="utf-8")
-    print('3')
-    print(tmp_json)
+    
     try:
         json.dump(input_data, tmp_json)
         tmp_json.close()
         print(tmp_json.name)  # Debug: print path to temp JSON file
         # 4. Run REEL pipeline
-        run_reel(tmp_json.name, run_label, args.model, args.link_mode)
+        run_reel(f"{run_label}_results.json", run_label, args.model, args.link_mode)
     finally:
         os.unlink(tmp_json.name)
 
     # 5. Read results JSON produced by run.py
     results_file = f"{run_label}_results.json"
-    if not os.path.exists(results_file):
+    """if not os.path.exists(results_file):
         print(f"Error: results file '{results_file}' not found after running REEL.", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(1)"""
 
     with open(results_file, encoding="utf-8") as f:
         results = json.load(f)
