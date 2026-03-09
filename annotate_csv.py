@@ -65,9 +65,8 @@ def run_reel(tmp_json_path, run_label, model, link_mode):
         "-target_kb", "chebi",
         "-model", model,
         "--link_mode", link_mode,
+        "--out_dir", f"{run_label}_out.json"
     ]
-    print(cmd)
-    print('*'*100)
     subprocess.run(cmd, check=True)
 
 
