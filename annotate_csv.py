@@ -57,8 +57,6 @@ def build_json_input(rows, entity_col):
 
 def run_reel(tmp_json_path, run_label, model, link_mode):
     """Invoke run.py as a subprocess with the temp JSON input file."""
-    print(cmd)
-    print('*'*100)
     cmd = [
         sys.executable,
         os.path.join(os.path.dirname(__file__), "run.py"),
