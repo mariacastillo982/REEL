@@ -60,6 +60,8 @@ def load_chebi():
 
     for node in  graph.nodes(data=True):
         
+        if "name" not in node[1]:
+            continue
         node_id, node_name = node[0].replace(':', '_'), node[1]["name"]
         name_to_id[node_name] = node_id
         
