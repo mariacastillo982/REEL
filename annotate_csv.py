@@ -57,6 +57,8 @@ def build_json_input(rows, entity_col):
 
 def run_reel(tmp_json_path, run_label, model, link_mode):
     """Invoke run.py as a subprocess with the temp JSON input file."""
+    print(cmd)
+    print('*'*100)
     cmd = [
         sys.executable,
         os.path.join(os.path.dirname(__file__), "run.py"),
@@ -66,6 +68,8 @@ def run_reel(tmp_json_path, run_label, model, link_mode):
         "-model", model,
         "--link_mode", link_mode,
     ]
+    print(cmd)
+    print('*'*100)
     subprocess.run(cmd, check=True)
 
 
@@ -104,16 +108,20 @@ def main():
 
     # 2. Build JSON input for REEL
     input_data = build_json_input(rows, entity_col)
-
+    print('1')
+    print(input_data)
     # 3. Write temp JSON file
     run_label = os.path.splitext(os.path.basename(args.input_csv))[0]
+    print('2')
+    print(run_label)
     tmp_json = tempfile.NamedTemporaryFile(
-        mode="w", suffix=".json", delete=False, encoding="utf-8"
-    )
+        mode="w", suffix=".json", delete=False, encoding="utf-8")
+    print('3')
+    print(tmp_json)
     try:
         json.dump(input_data, tmp_json)
         tmp_json.close()
-
+        print(tmp_json.name)  # Debug: print path to temp JSON file
         # 4. Run REEL pipeline
         run_reel(tmp_json.name, run_label, args.model, args.link_mode)
     finally:
